@@ -5,15 +5,14 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 
-if os.path.exists(".env"):
-    load_dotenv()
-    
-OPENAI_API_KEY = os.getenv('API_OAI')
-ORG_ID = os.getenv('ORG_ID')
+load_dotenv()    
 
-client = OpenAI(organization=ORG_ID, api_key=OPENAI_API_KEY)
-assistant_id = os.getenv('A')
-thread_id = os.getenv('T')
+ORG_ID = os.getenv('ORG_ID')
+api_key = os.environ.get('OPENAI_API_KEY')
+assistant_id = os.environ.get("ASSIST") #.getenv('A')
+thread_id = os.environ.get("THRD")  #.getenv('T')
+
+client = OpenAI(organization=ORG_ID, api_key=api_key)
 
 def save_uploaded_file(uploaded_file):
     with open(uploaded_file.name, "wb") as f:
